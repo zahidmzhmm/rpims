@@ -10,4 +10,3 @@ define('AUTHOR', 'Zahid Mzhmm');
 define("API_KEY", "admin12123");
 define('API_URI', "http://localhost:3000");
 define('ErrorReport', 1);
-unset($root_url);
