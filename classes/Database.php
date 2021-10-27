@@ -37,6 +37,22 @@ class Database
         }
     }
 
+    public function real_scape_str($str)
+    {
+        return mysqli_real_escape_string($this->connection, $str);
+    }
+
+    public function update($sql, $table, $row, $col = "id")
+    {
+        $update = $this->query($sql);
+        if ($update == true) {
+            $select = $this->fetchArray("select * from `$table` where `$col`='$row'");
+            $this->core->response("Success", "success", 200, $select);
+        } else {
+            $this->core->response("Data update problem");
+        }
+    }
+
     public function fetchAll($sql)
     {
         $query = $this->query($sql);
