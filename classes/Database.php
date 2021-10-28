@@ -74,4 +74,9 @@ class Database
             return false;
         }
     }
+
+    public function num_rows($sql)
+    {
+        return mysqli_num_rows($this->query($sql));
+    }
 }

@@ -54,7 +54,7 @@ class Notice
 
     public function view_all()
     {
-        $data = $this->db->fetchAll("SELECT * FROM `notice`");
+        $data = $this->db->fetchAll("SELECT * FROM `notice` order by id desc");
         if ($data !== false) {
             $this->core->response("Success", "success", 200, $data);
         } else {

@@ -21,29 +21,31 @@ class Room
         $description = $this->db->real_scape_str($data['description']);
         $slogan = $this->db->real_scape_str($data['slogan']);
         $instructor = $this->db->real_scape_str($data['instructor']);
+        $path = $this->db->real_scape_str($data['path']);
         $icon = $data['icon'];
         $image = $this->core->file_upload("image");
-        if (empty($title) || empty($description) || empty($slogan) || empty($instructor) || empty($icon) || empty($image)) {
+        if (empty($title) || empty($path) || empty($description) || empty($slogan) || empty($instructor) || empty($icon) || empty($image)) {
             $this->core->response("All Field is required");
             exit;
         }
-        $this->db->insert("INSERT INTO `departments`(`title`, `slogan`, `description`, `instructor`, `icon`, `image`) VALUES ('$title','$slogan','$description','$instructor','$icon','$image')", "departments");
+        $this->db->insert("INSERT INTO `departments`(`title`, `path`, `slogan`, `description`, `instructor`, `icon`, `image`) VALUES ('$title','$path','$slogan','$description','$instructor','$icon','$image')", "departments");
     }
 
     public function edit($data)
     {
         $id = $data['id'];
         $title = $this->db->real_scape_str($data['title']);
+        $path = $data['path'];
         $description = $this->db->real_scape_str($data['description']);
         $slogan = $this->db->real_scape_str($data['slogan']);
         $instructor = $this->db->real_scape_str($data['instructor']);
         $icon = $data['icon'];
         $image = empty($_FILES['image']['name']) ? $data['old_image'] : $this->core->file_upload("image");
-        if (empty($id) || empty($title) || empty($description) || empty($slogan) || empty($instructor) || empty($icon) || empty($image)) {
+        if (empty($id) || empty($title) || empty($path) || empty($description) || empty($slogan) || empty($instructor) || empty($icon) || empty($image)) {
             $this->core->response("All Field is required");
             exit;
         }
-        $this->db->update("UPDATE `departments` SET `title`='$title',`slogan`='$slogan',`description`='$description',`instructor`='$instructor',`icon`='$icon',`image`='$image' WHERE id='$id'", "departments", $id);
+        $this->db->update("UPDATE `departments` SET `title`='$title',`path`='$path',`slogan`='$slogan',`description`='$description',`instructor`='$instructor',`icon`='$icon',`image`='$image' WHERE id='$id'", "departments", $id);
     }
 
     public function addFiles($data)
@@ -92,7 +94,7 @@ class Room
 
     public function subjects($department_id)
     {
-        $data = $this->db->fetchAll("SELECT * FROM `subjects` where department_id='$department_id'");
+        $data = $this->db->fetchAll("SELECT * FROM `subjects` where department_id='$department_id' order by id desc");
         if ($data !== false) {
             $this->core->response("Success", "success", 200, $data);
         } else {
@@ -102,7 +104,7 @@ class Room
 
     public function subjects_all()
     {
-        $data = $this->db->fetchAll("SELECT * FROM `subjects`");
+        $data = $this->db->fetchAll("SELECT * FROM `subjects` order by id desc");
         if ($data !== false) {
             $this->core->response("Success", "success", 200, $data);
         } else {
@@ -122,8 +124,15 @@ class Room
 
     public function departments()
     {
-        $data = $this->db->fetchAll("SELECT * FROM `departments`");
+        $data = $this->db->fetchAll("SELECT * FROM `departments` order by id desc");
         if ($data !== false) {
+            $total = count($data) - 1;
+            for ($i = 0; $i <= $total; $i++) {
+                $dId = $data[$i]['id'];
+                $data[$i]['notice'] = $this->db->num_rows("select * from notice where department_id='$dId'");
+                $data[$i]['teachers'] = $this->db->num_rows("select * from users where department='$dId'and`role`='teacher'");
+                $data[$i]['students'] = $this->db->num_rows("select * from users where department='$dId'and`role`='student'");
+            }
             $this->core->response("Success", "success", 200, $data);
         } else {
             $this->core->response("Data not found");
@@ -132,11 +141,20 @@ class Room
 
     public function files()
     {
-        $data = $this->db->fetchAll("SELECT * FROM `files`");
+        $data = $this->db->fetchAll("SELECT * FROM `files` order by id desc");
         if ($data !== false) {
             $this->core->response("Success", "success", 200, $data);
         } else {
             $this->core->response("Data not found");
         }
+    }
+
+    public function tns_rows()
+    {
+        $array = [];
+        $array['teacher'] = $this->db->num_rows("select * from users where role='teacher'");
+        $array['notice'] = $this->db->num_rows("select * from notice");
+        $array['student'] = $this->db->num_rows("select * from users where role='student'");
+        $this->core->response("Success", "success", 200, $array);
     }
 }

@@ -86,4 +86,14 @@ class User
             $this->core->response("Data not found");
         }
     }
+
+    public function view_all()
+    {
+        $data = $this->database->fetchAll("SELECT * FROM `users` order by id desc");
+        if ($data !== false) {
+            $this->core->response("Success", "success", 200, $data);
+        } else {
+            $this->core->response("Data not found");
+        }
+    }
 }

@@ -6,11 +6,13 @@ if ($url === 'user' && isset($post['email'], $post['password'])) {
     $user->add($post);
 } elseif ($url === 'viewUser' && isset($get['id'])) {
     $user->view($get['id']);
+} elseif ($url === 'users') {
+    $user->view_all();
 } elseif ($url === 'editUser' && isset($post['id'], $post['name'], $post['password'], $post['roll'], $post['registration'], $post['department'], $post['semester'], $post['session'], $post['shift'], $post['role'])) {
     $user->edit($post);
-} elseif ($url === "addDepartment" && isset($post['title'], $post['slogan'], $post['description'], $post['instructor'], $post['icon'], $_FILES['image'])) {
+} elseif ($url === "addDepartment" && isset($post['title'], $post['path'], $post['slogan'], $post['description'], $post['instructor'], $post['icon'], $_FILES['image'])) {
     $room->add($post);
-} elseif ($url === "editDepartment" && isset($post['id'], $post['title'], $post['slogan'], $post['description'], $post['instructor'], $post['icon'], $_FILES['image'])) {
+} elseif ($url === "editDepartment" && isset($post['id'], $post['title'], $post['path'], $post['slogan'], $post['description'], $post['instructor'], $post['icon'], $_FILES['image'])) {
     $room->edit($post);
 } elseif ($url === "addFiles" && isset($post['name'], $_FILES['file'])) {
     $room->addFiles($post);
@@ -38,6 +40,8 @@ if ($url === 'user' && isset($post['email'], $post['password'])) {
     $room->files();
 } elseif ($url === "noticeAll") {
     $notice->view_all();
+} elseif ($url === "tns") {
+    $room->tns_rows();
 } else {
     $core->response("Something went wrong");
 }
