@@ -58,22 +58,18 @@ export default function Login() {
                                     {
                                         toggle ? <div>
                                             <form className="mt-3">
-                                                <p className="text-sm pb-2 text-ash font-normal">Username or email address *</p>
+                                                <p className="text-sm pb-2 text-ash font-normal">Email Address <span>*</span></p>
                                                 <input type="text" className="w-full px-2 py-2 text-sm outline-white" required style={{border:'1px solid rgba(0,0,0,0.1)'}}/>
                                                 <p className="text-sm pt-3  pb-2 text-ash font-normal">Password *</p>
                                                 <input type="password" className="w-full px-2 py-2 text-sm border outline-white" style={{border:'1px solid rgba(0,0,0,0.1)'}} required />
                                                 <div className="my-4 flex flex-wrap items-center justify-between">
-                                                    <button type="submit" className="border mb-3 lg:mb-0 flex items-center px-3 py-2 text-sm justify-between
+                                                    <button type="submit" className="border signup_login_btn mb-3 lg:mb-0 flex items-center px-3 py-2 text-sm justify-between
                                              border-first text-first transition ease-linear duration-150 cursor-pointer hover:bg-first hover:text-white">LOG IN <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
                                                             <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                                                        </svg></button>
-                                                    <div className="flex w-96 items-center justify-between">
-                                                        <div className="ml-3 flex items-center text-sm text-ash">
-                                                            <input className="mr-1 " type="checkbox" name="" id="" />
-                                                            Remember Me
-                                                        </div>
+                                                        </svg>
+                                                    </button>
+                                                    <div className="flex w-100 ml-2 justify-between">
                                                         <p className="cursor-pointer text-sm text-ash hover:text-primary-txt">
-
                                                             Forgot Your Password?
                                                         </p>
                                                     </div>
@@ -89,25 +85,25 @@ export default function Login() {
                                                     <p className="text-sm pt-3  pb-2 text-ash font-normal">Password *</p>
                                                     <input type="password" className="w-full px-2 py-2 text-sm border outline-white" style={{border:'1px solid rgba(0,0,0,0.1)'}} required />
                                                     <div className="my-4 flex flex-wrap items-center justify-between">
-                                                        <button type="submit" className="border mb-3 lg:mb-0 flex items-center px-3 py-2 text-sm justify-between
-                                             border-first text-first transition ease-linear duration-150 cursor-pointer hover:bg-first hover:text-white">SIGN UP <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                                                                <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                                                            </svg></button>
-                                                        <div className="flex w-96 items-center justify-between">
-                                                            <div className="ml-3 flex items-center text-sm text-ash">
-                                                                <input className="mr-1 " type="checkbox" name="" id="" required />
-                                                                I agree to the privacy policy *
+                                                        <div className="flex w-100 items-center justify-between">
+                                                            <div className="flex items-center text-sm text-ash">
+                                                                <input className="mr-1 " type="checkbox" name="" id="terms_accept" required />
+                                                                <label htmlFor="terms_accept">I agree to the privacy policy *</label>
                                                             </div>
-
                                                         </div>
+                                                        <button type="submit" className="border signup_login_btn mb-3 lg:mb-0 flex items-center px-3 py-2 text-sm justify-between
+                                             border-first text-first transition ease-linear duration-150 cursor-pointer hover:bg-first hover:text-white">SIGN UP <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                        </svg>
+                                                        </button>
                                                     </div>
                                                 </form>
                                             </div>
                                     }
-                                    <p className="text-center text-xs text-ash">or sign in with</p>
+                                    {/*<p className="text-center text-xs text-ash">or sign in with</p>
                                     <div className="flex items-center justify-center mt-4 ">
                                         <button className="text-center mx-auto px-4 py-1 border bg-first text-sm cursor-pointer hover:bg-second text-white transition delay-100 ease-linear">Login with Gogle</button>
-                                    </div>
+                                    </div>*/}
                                 </div>
                             </div>
                         </div>

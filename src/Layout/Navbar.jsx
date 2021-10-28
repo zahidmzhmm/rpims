@@ -1,4 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
 import {Fragment} from 'react'
 import {Popover, Transition} from '@headlessui/react'
 import {
@@ -14,58 +13,22 @@ import {
     AcademicCapIcon
 } from '@heroicons/react/outline'
 import {ChevronDownIcon} from '@heroicons/react/solid'
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 import React from 'react'
-import {RapperContent} from '../App'
-
-const solutions = [
-    {
-        name: 'Computer',
-        icon: DesktopComputerIcon,
-    },
-    {
-        name: 'Civil',
-        icon: BriefcaseIcon,
-    },
-    {
-        name: 'Electrical',
-        icon: LightningBoltIcon,
-    },
-    {
-        name: 'Electronics',
-        icon: ChipIcon,
-    },
-    {
-        name: 'Mechanical',
-        icon: CogIcon,
-    },
-    {
-        name: 'Mechatronics',
-        icon: GlobeIcon,
-    },
-    {
-        name: 'Power',
-        icon: LightBulbIcon,
-    },
-    {
-        name: 'Electromedical',
-        icon: AcademicCapIcon,
-    },
-
-]
-
+import {RapperContent, AllDataContext} from '../App';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
 export default function Navbar() {
-    const {setAuthopen} = React.useContext(RapperContent)
+    const {setAuthopen} = React.useContext(RapperContent);
+    const {allData} = React.useContext(AllDataContext);
     return (
 
-        <Popover className="bg-white fixed top-0 left-0 z-40 w-full">
-            <div className="bg-first text-white py-2 hidden lg:block ">
-                <div className="px-6 flex gap-4 items-center justify-between">
+        <Popover className="bg-white top-0 left-0 z-40 w-full">
+            <div className="bg-first text-white py-2 hidden lg:block">
+                <div className="flex w-10/12 mx-auto gap-4 items-center justify-between">
                     <div className="flex items-center text-xs">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20"
                              fill="currentColor">
@@ -73,7 +36,9 @@ export default function Navbar() {
                                   d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
                                   clipRule="evenodd"/>
                         </svg>
-                        sopura, rajshahi, bd
+                        <a target="_blank"
+                           href="https://www.google.com/maps/place/Rajshahi+Polytechnic+Institute/@24.3790863,88.6045068,17z/data=!4m12!1m6!3m5!1s0x39fbee4db10be455:0xc6ee56098bd61ee9!2sRajshahi+Polytechnic+Institute!8m2!3d24.3790814!4d88.6066955!3m4!1s0x39fbee4db10be455:0xc6ee56098bd61ee9!8m2!3d24.3790814!4d88.6066955">R685,
+                            Rajshahi 6203</a>
                     </div>
                     <div className="flex items-center text-xs">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20"
@@ -83,7 +48,7 @@ export default function Navbar() {
                             <path
                                 d="M16.707 3.293a1 1 0 010 1.414L15.414 6l1.293 1.293a1 1 0 01-1.414 1.414L14 7.414l-1.293 1.293a1 1 0 11-1.414-1.414L12.586 6l-1.293-1.293a1 1 0 011.414-1.414L14 4.586l1.293-1.293a1 1 0 011.414 0z"/>
                         </svg>
-                        +19 123-456-7890
+                        <a href="tel:880721761977">+880721761977</a>
                     </div>
                     <div className="flex items-center text-xs">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20"
@@ -91,13 +56,12 @@ export default function Navbar() {
                             <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
                             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
                         </svg>
-                        mail@yourdomain.com
+                        <a href="mailto:rajpolytechnic@gmail.com">rajpolytechnic@gmail.com</a>
                     </div>
                 </div>
-
             </div>
-            <div className="px-4 sm:px-6 h-20 lg:h-30">
-                <div className="flex justify-between items-center md:justify-start md:space-x-10">
+            <div className="navbarSection h-20 lg:h-30">
+                <div className="flex w-10/12 mx-auto justify-between items-center md:justify-start md:space-x-10">
                     <div className="flex justify-start lg:w-0 lg:flex-1">
                         <Link to="/">
                             <img
@@ -116,9 +80,18 @@ export default function Navbar() {
                         </Popover.Button>
                     </div>
                     <Popover.Group as="nav" className="hidden md:flex space-x-10">
-                        <Link to="/" className="text-base font-medium text-ash hover:text-second">
+                        <NavLink to="/" exact={true}
+                              className="text-base font-medium text-ash hover:text-second">
                             Home
-                        </Link>
+                        </NavLink>
+                        <NavLink to="/notice" exact={true}
+                              className="text-base font-medium text-ash hover:text-second">
+                            Notice
+                        </NavLink>
+                        <NavLink to="/result" exact={true}
+                              className="text-base font-medium text-ash hover:text-second">
+                            Result
+                        </NavLink>
                         <Popover className="relative">
                             {({open}) => (
                                 <>
@@ -154,18 +127,51 @@ export default function Navbar() {
                                                 className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                                                 <div
                                                     className="relative grid z-30 gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                                                    {solutions.map((item) => (
-                                                        <Link to="/"
-                                                              key={item.name}
-                                                              className="-m-3 p-3 flex relative z-30 items-start rounded-lg hover:bg-gray-50">
-                                                            <item.icon className="flex-shrink-0 h-6 w-6 text-ash"
-                                                                       aria-hidden="true"/>
-                                                            <div className="ml-4">
-                                                                <Link to={"/" + item.name + "/notice"}
-                                                                      className="text-base font-medium text-ash hover:text-second hover:ml ">{item.name}</Link>
-                                                            </div>
-                                                        </Link>
-                                                    ))}
+                                                    {allData.departments.map((item) =>
+
+                                                        (
+                                                            <Link to={"/" + item.id + "/notice"}
+                                                                  key={item.id}
+                                                                  className="-m-3 p-3 flex relative z-30 items-start rounded-lg hover:bg-gray-50">
+                                                                {item.icon === "DesktopComputerIcon" &&
+                                                                <DesktopComputerIcon
+                                                                    className="flex-shrink-0 h-6 w-6 text-ash"
+                                                                    aria-hidden="true"/>}
+                                                                {item.icon === "BriefcaseIcon" &&
+                                                                <BriefcaseIcon
+                                                                    className="flex-shrink-0 h-6 w-6 text-ash"
+                                                                    aria-hidden="true"/>}
+                                                                {item.icon === "LightningBoltIcon" &&
+                                                                <LightningBoltIcon
+                                                                    className="flex-shrink-0 h-6 w-6 text-ash"
+                                                                    aria-hidden="true"/>}
+                                                                {item.icon === "ChipIcon" &&
+                                                                <ChipIcon
+                                                                    className="flex-shrink-0 h-6 w-6 text-ash"
+                                                                    aria-hidden="true"/>}
+                                                                {item.icon === "CogIcon" &&
+                                                                <CogIcon
+                                                                    className="flex-shrink-0 h-6 w-6 text-ash"
+                                                                    aria-hidden="true"/>}
+                                                                {item.icon === "LightBulbIcon" &&
+                                                                <LightBulbIcon
+                                                                    className="flex-shrink-0 h-6 w-6 text-ash"
+                                                                    aria-hidden="true"/>}
+                                                                {item.icon === "AcademicCapIcon" &&
+                                                                <AcademicCapIcon
+                                                                    className="flex-shrink-0 h-6 w-6 text-ash"
+                                                                    aria-hidden="true"/>}
+                                                                {item.icon === "GlobeIcon" &&
+                                                                <GlobeIcon
+                                                                    className="flex-shrink-0 h-6 w-6 text-ash"
+                                                                    aria-hidden="true"/>}
+
+                                                                <div className="ml-4">
+                                                                    <Link to={"/" + item.id + "/notice"}
+                                                                          className="text-base font-medium text-ash hover:text-second hover:ml ">{item.title}</Link>
+                                                                </div>
+                                                            </Link>
+                                                        ))}
                                                 </div>
 
                                             </div>
@@ -218,14 +224,46 @@ export default function Navbar() {
                             </div>
                             <div className="mt-6">
                                 <nav className="grid gap-y-8 relative z-50">
-                                    {solutions.map((item) => (
-                                        <Link to="/details"
-                                              key={item.name}
+                                    {allData.departments.map((item) => (
+                                        <Link to={`${item.id}/notice`}
+                                              key={item.id}
                                               className="-m-3 p-3 flex relative z-50 items-center rounded-md hover:bg-gray-50">
-                                            <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600"
-                                                       aria-hidden="true"/>
+
+                                            {item.icon === "DesktopComputerIcon" &&
+                                            <DesktopComputerIcon
+                                                className="flex-shrink-0 h-6 w-6 text-ash"
+                                                aria-hidden="true"/>}
+                                            {item.icon === "BriefcaseIcon" &&
+                                            <BriefcaseIcon
+                                                className="flex-shrink-0 h-6 w-6 text-ash"
+                                                aria-hidden="true"/>}
+                                            {item.icon === "LightningBoltIcon" &&
+                                            <LightningBoltIcon
+                                                className="flex-shrink-0 h-6 w-6 text-ash"
+                                                aria-hidden="true"/>}
+                                            {item.icon === "ChipIcon" &&
+                                            <ChipIcon
+                                                className="flex-shrink-0 h-6 w-6 text-ash"
+                                                aria-hidden="true"/>}
+                                            {item.icon === "CogIcon" &&
+                                            <CogIcon
+                                                className="flex-shrink-0 h-6 w-6 text-ash"
+                                                aria-hidden="true"/>}
+                                            {item.icon === "LightBulbIcon" &&
+                                            <LightBulbIcon
+                                                className="flex-shrink-0 h-6 w-6 text-ash"
+                                                aria-hidden="true"/>}
+                                            {item.icon === "AcademicCapIcon" &&
+                                            <AcademicCapIcon
+                                                className="flex-shrink-0 h-6 w-6 text-ash"
+                                                aria-hidden="true"/>}
+                                            {item.icon === "GlobeIcon" &&
+                                            <GlobeIcon
+                                                className="flex-shrink-0 h-6 w-6 text-ash"
+                                                aria-hidden="true"/>}
+
                                             <span
-                                                className="ml-3 text-base font-medium text-gray-900">{item.name}</span>
+                                                className="ml-3 text-base font-medium text-gray-900">{item.title}</span>
                                         </Link>
                                     ))}
                                 </nav>
