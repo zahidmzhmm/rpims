@@ -1,8 +1,7 @@
 import React from "react";
-import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
 import {AllDataContext} from "../../App";
 import {apiURI} from "../../data/config";
+import Loader from "../Loader";
 
 export default function Users({department, role}) {
     const [show, setShow] = React.useState(false);
@@ -82,29 +81,11 @@ export default function Users({department, role}) {
                         </div>
                     </>
                     :
-                    <Box sx={{
-                        display: 'flex',
-                        width: '100%',
-                        height: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}>
-                        <CircularProgress/>
-                    </Box>
+                    <Loader />
                 }
             </>
         )
     } else {
-        return (
-            <Box sx={{
-                display: 'flex',
-                width: '100%',
-                height: '100%',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <CircularProgress/>
-            </Box>
-        )
+        return Loader;
     }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import {importAllUsers} from "../data/users";
 import {apiURI} from "../data/config";
+import Loader from "./Loader";
 
 const Students = () => {
     const [data, setUsersData] = React.useState(false);
@@ -74,7 +75,7 @@ const Students = () => {
             </>
         );
     } else {
-        return "Data not found";
+        return Loader;
     }
 };
 

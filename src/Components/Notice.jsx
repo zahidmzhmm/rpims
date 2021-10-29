@@ -1,5 +1,6 @@
 import React from 'react';
 import {importAllNotice} from "../data/notice";
+import Loader from "./Loader";
 
 const Notice = () => {
     const [data, setData] = React.useState(false);
@@ -72,7 +73,7 @@ const Notice = () => {
             </>
         );
     } else {
-        return "Data not found";
+        return Loader;
     }
 };
 

@@ -14,6 +14,7 @@ import ScrollToTop from '../ScrollTop';
 import BookList from "./BookList";
 import {AllDataContext} from "../../App";
 import {apiURI} from "../../data/config";
+import Loader from "../Loader";
 
 const Dashboard = () => {
     const {depName, routeName} = useParams();
@@ -224,16 +225,7 @@ const Dashboard = () => {
                             </div>
                         </Router>
                     ))
-                    :
-                    <Box sx={{
-                        display: 'flex',
-                        width: '100%',
-                        height: '100vh',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}>
-                        <CircularProgress/>
-                    </Box>
+                    :<Loader />
             }
         </>
     )

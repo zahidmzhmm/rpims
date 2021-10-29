@@ -6,8 +6,10 @@ import {
 } from "react-router-dom";
 import Dashboard from './Components/Dashboard/Dashboard';
 import Home from './Components/Home/Home';
-import Footer from './Layout/Footer';
-import Navbar from './Layout/Navbar';
+import Footer from './layouts/Footer';
+import Navbar from './layouts/Navbar';
+import AdminHeader from './layouts/AdminHeader';
+import AdminFooter from './layouts/AdminFooter';
 import {createContext} from 'react'
 import Login from './Components/Authentication/Login';
 import {importAllDepartments, importTnsCount} from './data/departments';
@@ -18,6 +20,7 @@ import Notice from "./Components/Notice";
 import Result from "./Components/Result";
 import Students from "./Components/Students";
 import Teachers from "./Components/Teachers";
+import AdminDashboard from "./Admin/AdminDashboard";
 
 export const RapperContent = createContext();
 export const AllDataContext = createContext();
@@ -37,6 +40,11 @@ const App = () => {
         importTnsCount(setTnsCountData)
         setUpdate(false);
     }
+    const websiteinfos = {
+        header_logo: "test.jpg",
+        favicon: "favicon.ico"
+    }
+    const localData = localStorage.getItem("@users");
     if (update === false && departmentData !== false && noticeData !== false && subjectData !== false && usersData !== false && tnsCountData !== false) {
         const allData = {
             departments: departmentData,
@@ -45,25 +53,41 @@ const App = () => {
             users: usersData,
             tnsCount: tnsCountData
         }
-        return (
-            <RapperContent.Provider value={{authopen, setAuthopen}}>
-                <AllDataContext.Provider value={{allData: allData}}>
-                    <Router>
-                        <Navbar/>
-                        <Login/>
-                        <Switch>
-                            <Route exact path="/" component={Home}/>
-                            <Route exact path="/:depName/:routeName" component={Dashboard}/>
-                            <Route exact path="/notice" component={Notice}/>
-                            <Route exact path="/result" component={Result}/>
-                            <Route exact path="/students" component={Students}/>
-                            <Route exact path="/teachers" component={Teachers}/>
-                        </Switch>
-                        <Footer/>
-                    </Router>
-                </AllDataContext.Provider>
-            </RapperContent.Provider>
-        )
+        if (localData === null) {
+            return (
+                <RapperContent.Provider value={{authopen, setAuthopen}}>
+                    <AllDataContext.Provider value={{allData: allData}}>
+                        <Router>
+                            <Navbar/>
+                            <Login/>
+                            <Switch>
+                                <Route exact path="/" component={Home}/>
+                                <Route exact path="/:depName/:routeName" component={Dashboard}/>
+                                <Route exact path="/notice" component={Notice}/>
+                                <Route exact path="/result" component={Result}/>
+                                <Route exact path="/students" component={Students}/>
+                                <Route exact path="/teachers" component={Teachers}/>
+                                <Route exact path="/admin" component={AdminDashboard}/>
+                            </Switch>
+                            <Footer/>
+                        </Router>
+                    </AllDataContext.Provider>
+                </RapperContent.Provider>
+            )
+        } else {
+            /*<AdminHeader websiteInfos={websiteinfos} />
+            <AdminDashboard/>*/
+            return (
+                <RapperContent.Provider value={{authopen, setAuthopen}}>
+                    <AllDataContext.Provider value={{allData: allData}}>
+                        <Router>
+                            <Route exact path="/" render={(props) => <AdminDashboard
+                                websiteInfos={websiteinfos} {...props}/>}/>
+                        </Router>
+                    </AllDataContext.Provider>
+                </RapperContent.Provider>
+            )
+        }
     } else {
         return "Loading...";
     }

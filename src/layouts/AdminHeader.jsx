@@ -1,15 +1,15 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import {mainURI} from "../../config";
+import {apiURI} from "../data/config";
 
-const Header = ({websiteInfos}) => {
+const AdminHeader = ({websiteInfos}) => {
     return (
         <>
             <header className="topbar">
                 <nav className="navbar top-navbar navbar-expand-md navbar-light">
                     <div className="navbar-header">
                         <a className="navbar-brand py-0">
-                            <img style={{width: '70%'}} src={mainURI + websiteInfos.header_logo} alt=""/>
+                            <img style={{width: '70%'}} src={apiURI + websiteInfos.header_logo} alt=""/>
                         </a>
                     </div>
                     <div className="navbar-collapse">
@@ -19,7 +19,7 @@ const Header = ({websiteInfos}) => {
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle text-muted waves-effect waves-dark"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src={mainURI + websiteInfos.favicon} alt="user" className="profile-pic"/>
+                                    <img src={apiURI + websiteInfos.favicon} alt="user" className="profile-pic"/>
                                 </a>
                                 <div className="dropdown-menu dropdown-menu-right scale-up"
                                      style={{width: "6rem", overflow: "hidden", right: "3px", marginLeft: "auto"}}>
@@ -36,4 +36,4 @@ const Header = ({websiteInfos}) => {
     );
 };
 
-export default Header;
+export default AdminHeader;

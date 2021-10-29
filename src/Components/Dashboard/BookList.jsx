@@ -2,6 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import {importBookList} from "../../data/subjects";
+import Loader from "../Loader";
 
 export default function BookList({department}) {
     const [show, setShow] = React.useState(false);
@@ -81,32 +82,13 @@ export default function BookList({department}) {
                                     </div>
                                 </div>
                             </div>
-                        </> :
-                        <Box sx={{
-                            display: 'flex',
-                            width: '100%',
-                            height: '100%',
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        }}>
-                            <CircularProgress/>
-                        </Box>
+                        </> :<Loader />
                 }
 
             </>
         )
     } else {
-        return (
-            <Box sx={{
-                display: 'flex',
-                width: '100%',
-                height: '100%',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <CircularProgress/>
-            </Box>
-        )
+        return Loader;
     }
 }
 
